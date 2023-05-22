@@ -3,13 +3,18 @@
 
     <b-container>
       <div class="logoText">
+        
+  <b-alert :show="showAlert" variant="warning">
+    
+    <b>Giá vừa cập nhật cách đây {{ maxVal }}</b></b-alert>
         <h1>TIỆM VÀNG BẢO PHƯƠNG</h1>
         <h3>Bảng giá <span style="color:red">{{ thisDate }}</span></h3>
+
       </div>
       <hr />
       <div class="main">
         <b-overlay :show="isReady">
-          <b-table class="align-middle" fixed :items="banggia" border id="myTable" style="height:70vh;text-align: center;" sort-by="index" :fields="fields">
+          <b-table class="align-middle" head-variant="light" fixed :items="banggia" border id="myTable" style="height:70vh;text-align: center;" sort-by="index" :fields="fields">
             <template  #table-caption>Cập nhật cách đây {{ maxVal }}</template>
             <template #cell(muavao)="item">
               <span class="valueInTable">
@@ -46,7 +51,7 @@
 
             </template>
             <template #cell(name)="item">
-              <span class="valueInTable">
+              <span class="valueInTableName">
 {{ item.item.name }}
               </span>
             </template>
@@ -63,21 +68,22 @@
 export default {
   data() {
     return {
+      showAlert:false,
       thisDate: null,
       banggia: [],
       maxVal: 0,
       fields: [
         {
           key: "name",
-          label: "Loại"
+          label: "Loại vàng | ĐVT : 1.000đ/Chỉ"
         },
         {
           key: "muavao",
-          label: "Mua"
+          label: "Giá Mua"
         },
         {
           key: "banra",
-          label: "Bán"
+          label: "Giá Bán"
         }
       ],
       rootURL: 'https://database.deta.sh/v1/c0sqkszrljw/banggiatv',
@@ -133,12 +139,10 @@ export default {
       this.getValue()
       },1000*this.reloadTime)
        if(diffTime.diffMins<10){
-        this.$bvToast.toast(`Bảng giá đã thay đổi cách đây ${this.maxVal}`, {
-          title: 'Giá thay đổi',
-          autoHideDelay: 10000,
+        this.showAlert=true;
        
-          variant:'warning'
-        })
+       }else{
+        this.showAlert=false
        }
       
       })
@@ -200,10 +204,15 @@ export default {
 }
 
 .valueInTable {
-  color: red;
+  color: rgb(173, 216, 19);
   padding: 0px !important;
-  font-size: 3rem;
+  font-size: 200%;
   font-weight: 900;
+}
+.valueInTableName{
+  padding: 0px !important;
+  font-size: 200%;
+  font-weight: 500;
 }
 #myTable > tbody > tr > td {
      vertical-align: middle !important;
