@@ -6,7 +6,7 @@
         
   <b-alert :show="showAlert" variant="warning">
     
-    <b>Giá vừa cập nhật cách đây {{ maxVal }}</b></b-alert>
+    <b>Giá vừa cập nhật cách đây {{ maxValJustMin }}</b></b-alert>
         <h4>TIỆM VÀNG BẢO PHƯƠNG</h4>
         <h6>Bảng giá <span style="color:red">{{ thisDate }}</span> | ĐVT : 1.000đ</h6>
       </div>
@@ -66,6 +66,7 @@
 export default {
   data() {
     return {
+      maxValJustMin:"",
       showAlert:false,
       thisDate: null,
       banggia: [],
@@ -136,6 +137,7 @@ export default {
         })
        let diffTime = this.calcDiffDate(maxVal,(new Date()).getTime())
        this.maxVal=diffTime.diffDays + " ngày, " + diffTime.diffHrs + " giờ, " + diffTime.diffMins + " phút"
+       this.maxValJustMin = diffTime.diffMins +" phút"
        setTimeout(()=>{
       this.getValue()
       },1000*this.reloadTime)
