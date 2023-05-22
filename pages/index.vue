@@ -8,7 +8,7 @@
     
     <b>Giá vừa cập nhật cách đây {{ maxVal }}</b></b-alert>
         <h4>TIỆM VÀNG BẢO PHƯƠNG</h4>
-        <h6>Bảng giá <span style="color:red">{{ thisDate }}</span></h6>
+        <h6>Bảng giá <span style="color:red">{{ thisDate }}</span> | ĐVT : 1.000đ</h6>
       </div>
       <div class="main">
         <b-overlay :show="isReady">
@@ -73,7 +73,7 @@ export default {
       fields: [
         {
           key: "name",
-          label: "Loại vàng | ĐVT : 1.000đ/Chỉ",
+          label: "Loại vàng",
           tdClass: 'align-middle' 
         },
         {
