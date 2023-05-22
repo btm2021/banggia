@@ -12,7 +12,7 @@
       </div>
       <div class="main">
         <b-overlay :show="isReady">
-          <b-table class="align-middle" head-variant="light" fixed :items="banggia" border id="myTable" style="height:70vh;text-align: center;" sort-by="index" :fields="fields">
+          <b-table class="align-middle" head-variant="light" fixed :items="banggia" border id="myTable" style="height:60vh;text-align: center;" sort-by="index" :fields="fields">
             <template  class="align-middle" #table-caption>Cập nhật cách đây {{ maxVal }}</template>
             <template  #cell(muavao)="item">
               <span class="valueInTable align-middle">
