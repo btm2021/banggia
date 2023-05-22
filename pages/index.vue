@@ -7,17 +7,15 @@
   <b-alert :show="showAlert" variant="warning">
     
     <b>Giá vừa cập nhật cách đây {{ maxVal }}</b></b-alert>
-        <h1>TIỆM VÀNG BẢO PHƯƠNG</h1>
-        <h3>Bảng giá <span style="color:red">{{ thisDate }}</span></h3>
-
+        <h4>TIỆM VÀNG BẢO PHƯƠNG</h4>
+        <h6>Bảng giá <span style="color:red">{{ thisDate }}</span></h6>
       </div>
-      <hr />
       <div class="main">
         <b-overlay :show="isReady">
           <b-table class="align-middle" head-variant="light" fixed :items="banggia" border id="myTable" style="height:70vh;text-align: center;" sort-by="index" :fields="fields">
-            <template  #table-caption>Cập nhật cách đây {{ maxVal }}</template>
-            <template #cell(muavao)="item">
-              <span class="valueInTable">
+            <template  class="align-middle" #table-caption>Cập nhật cách đây {{ maxVal }}</template>
+            <template  #cell(muavao)="item">
+              <span class="valueInTable align-middle">
                 <span
                   @click="changeInput({ name: item.item.name, key: item.item.key, gia: item.item.muavao }, 'giamua')">{{
                     item.item.muavao
@@ -75,15 +73,18 @@ export default {
       fields: [
         {
           key: "name",
-          label: "Loại vàng | ĐVT : 1.000đ/Chỉ"
+          label: "Loại vàng | ĐVT : 1.000đ/Chỉ",
+          tdClass: 'align-middle' 
         },
         {
           key: "muavao",
-          label: "Giá Mua"
+          label: "Giá Mua",
+          tdClass: 'align-middle' 
         },
         {
           key: "banra",
-          label: "Giá Bán"
+          label: "Giá Bán",
+          tdClass: 'align-middle' 
         }
       ],
       rootURL: 'https://database.deta.sh/v1/c0sqkszrljw/banggiatv',
@@ -213,13 +214,5 @@ export default {
   padding: 0px !important;
   font-size: 200%;
   font-weight: 500;
-}
-#myTable > tbody > tr > td {
-     vertical-align: middle !important;
-}
-#myTable.vertical-align > tbody > tr > td {
-  display: flex;
-  align-items: center; vertical-align: middle !important;
-
 }
 </style>
