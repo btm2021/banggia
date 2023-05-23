@@ -219,8 +219,8 @@ export default {
 .valueInTable {
   color: rgb(173, 216, 19);
   padding: 0px !important;
-  font-size: 200%;
-  font-weight: 900;
+  font-size: 150%;
+  font-weight: 700;
 }
 
 .valueInTableName {
