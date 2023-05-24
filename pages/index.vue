@@ -13,7 +13,7 @@
       <div class="main">
      
           <b-table class="align-middle" head-variant="light" fixed :items="banggia" border id="myTable"
-            style="height:60vh;text-align: center;" sort-by="index" :fields="fields">
+            style="height:80vh;text-align: center;" sort-by="index" :fields="fields">
             <template class="align-middle" #table-caption>Cập nhật cách đây {{ maxVal }}</template>
             <template #cell(muavao)="item">
               <span class="valueInTable align-middle">
@@ -116,7 +116,7 @@ export default {
       let val = prompt(`Giá Mới ${(action === 'giamua' ? "Mua Vào" : "Bán ra")} ${item.name} là :`)
       if (val) {
         this.updateValue(val, item.gia, item.key, action)
-        this.typeChange = item.name
+      
       }
     },
     getValue() {
@@ -131,21 +131,32 @@ export default {
         },
 
       }).then(data => data.json()).then(data => {
+        console.log(data.items)
         this.banggia = data.items
         this.isReady = false;
         let maxVal = 0
+        let listChange=[]
         this.banggia.forEach(i => {
+          let diffTime = this.calcDiffDate(i.updateTime, (new Date()).getTime())
+          if (diffTime.diffMins < 10 && diffTime.diffDays==0 &&diffTime.diffHrs==0) {
+            listChange.push(`${i.name}`)
+          }
           if (i.updateTime > maxVal) {
             maxVal = i.updateTime
           }
+          //kiểm tra difftime
+      
         })
+        this.typeChange= listChange.toString();
+        //kiểm tra ông nào thay đổi
+
         let diffTime = this.calcDiffDate(maxVal, (new Date()).getTime())
         this.maxVal = diffTime.diffDays + " ngày, " + diffTime.diffHrs + " giờ, " + diffTime.diffMins + " phút"
         this.maxValJustMin = diffTime.diffMins + " phút"
         setTimeout(() => {
           this.getValue()
         }, 1000 * this.reloadTime)
-        if (diffTime.diffMins < 10) {
+        if (diffTime.diffMins < 10 && diffTime.diffDays==0 &&diffTime.diffHrs==0) {
           this.showAlert = true;
 
         } else {
