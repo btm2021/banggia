@@ -33,7 +33,8 @@ export default {
   
       this.makeToast(str,'primary')
     });
-    //tem
+    //tem\
+    //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
     console.log('* thiết lập realtime SSE tới Server')
     },
     makeToast(msg, variant) {
