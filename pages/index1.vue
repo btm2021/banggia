@@ -5,11 +5,13 @@ bb
 </template>
 
 <script>
-import PocketBase from 'pocketbase'
-const pb = new PocketBase('https://tiemvang.fly.dev/');
+
 export default {
-async mounted(){
-  let result = await pb.collection('sanpham').getOne('rctyz63v0bb8r53', {
+  layout: 'blog',
+  async mounted(){
+  
+    debugger
+  let result = await $pocketbase.collection('sanpham').getOne('rctyz63v0bb8r53', {
     expand: 'hamluongvang.ten'
 });
  console.log(result)
