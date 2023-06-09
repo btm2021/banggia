@@ -1,23 +1,19 @@
 <template>
-  <h1>hello</h1>
+  <div>
+bb
+  </div>
 </template>
 
 <script>
-const { Deta } = require('deta'); // import Deta
-
-// Initialize with a Project Key
-// locally, set the project key in an env var called DETA_PROJECT_KEY
-const deta = Deta("c0zw9qrjkal_ehAKM7hG7k8UzAJFkav7hJZ2aF4qbszD");
-
-// This how to connect to or create a database.
-const db = deta.Base('sanpham');
-
-// You can create as many as you want without additional charges.
-
+import PocketBase from 'pocketbase'
+const pb = new PocketBase('https://tiemvang.fly.dev/');
 export default {
 async mounted(){
-  let item = await db.get('hibtaia0p94v'); 
-  console.log(item)
+  let result = await pb.collection('sanpham').getOne('rctyz63v0bb8r53', {
+    expand: 'hamluongvang.ten'
+});
+ console.log(result)
+
 }
 }
 </script>
